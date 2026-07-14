@@ -4,10 +4,6 @@ import {
   ShieldCheck, ShieldAlert, Wallet, ChevronDown, X, Radio, Loader2
 } from 'lucide-react';
 
-/* ------------------------------------------------------------------ */
-/*  Design tokens — "field instrument" palette: dry-season khaki,     */
-/*  soil, rain-teal, and a burnt-sienna alert reserved for drought.   */
-/* ------------------------------------------------------------------ */
 const C = {
   ink: '#20261C',
   inkSoft: '#5B5641',
@@ -57,10 +53,6 @@ const FONTS_CSS = `
 .as-scroll::-webkit-scrollbar-thumb { background: ${C.line}; border-radius: 4px; }
 `;
 
-/* ------------------------------------------------------------------ */
-/*  Mock / sandbox data — mirrors the shape returned by the backend   */
-/*  so this dashboard renders meaningfully with zero configuration.   */
-/* ------------------------------------------------------------------ */
 const SEED_WEATHER = [
   { county: 'Machakos', rainfallAmount: 34.2, threshold: 20, consecutiveDryDays: 6, risk: 'LOW' },
   { county: 'Kitui', rainfallAmount: 41.0, threshold: 20, consecutiveDryDays: 3, risk: 'LOW' },
@@ -77,10 +69,6 @@ const SEED_FARMERS = [
 let idSeq = 100;
 const nextId = () => `sim-${idSeq++}`;
 
-/* ------------------------------------------------------------------ */
-/*  Rain gauge — the signature element. An analog instrument reading  */
-/*  literalizes the parametric trigger: value vs. a fixed threshold.  */
-/* ------------------------------------------------------------------ */
 function RainGauge({ county, rainfall, threshold, dryDays, justTriggered }) {
   const max = threshold * 2.5;
   const clamped = Math.max(0, Math.min(max, rainfall));
@@ -171,9 +159,7 @@ function RainGauge({ county, rainfall, threshold, dryDays, justTriggered }) {
   );
 }
 
-/* ------------------------------------------------------------------ */
 /*  Overview card                                                     */
-/* ------------------------------------------------------------------ */
 function StatCard({ icon: Icon, label, value, accent }) {
   return (
     <div style={{ background: C.white, border: `1px solid ${C.line}`, borderRadius: 4, padding: '16px 18px', flex: 1, minWidth: 150 }}>
@@ -185,10 +171,8 @@ function StatCard({ icon: Icon, label, value, accent }) {
     </div>
   );
 }
+/* Main dashboard                                                    */
 
-/* ------------------------------------------------------------------ */
-/*  Main dashboard                                                    */
-/* ------------------------------------------------------------------ */
 export default function AgriShieldDashboard() {
   const [farmers, setFarmers] = useState(SEED_FARMERS);
   const [weather, setWeather] = useState(SEED_WEATHER);
